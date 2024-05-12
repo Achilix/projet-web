@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Prepare SQL statement with parameterized query
     $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $email, $password);
@@ -27,10 +26,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        // Login successful
-        echo "Login successful";
+        // Fetch user record from the result set
+        $user = $result->fetch_assoc();
+        $userType = $user['usertype']; // Assuming 'usertype' is the column name for user type in the users table
+
+        // Determine the action URL based on user type
+        if ($userType === 'admin') {
+            $loginAction = 'index.html';
+        } elseif ($userType === 'student') {
+            $loginAction = 'ind.html';
+        } else {
+            $loginAction = 'login.html';
+        }
+
+        // Redirect the user to the appropriate page
+        header("Location: $loginAction");
+        exit(); // Ensure script execution stops after redirection
     } else {
-        // Invalid email or password
         echo "Invalid email or password";
     }
 
