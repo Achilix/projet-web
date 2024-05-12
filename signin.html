@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+</head>
+<body>
+    <form action="signin.php" method="post">
+        <input name="f_name" required> First name<br>
+        <input name="l_name" required> Last name<br>
+        <input name="email" required> Email<br>
+        <input type="password" name="password1" required> Password<br>
+        <input type="password" name="password2" required> Confirm Password<br>
+        <button name="button">Submit</button>
+        <div id="passtxt"></div>
+    </form>
+</body>
+</html>
+<script>
+let button = document.getElementsByName('button')[0];
+button.addEventListener('click', function(event) {
+    let pass1 = document.getElementsByName('password1')[0].value;
+    let pass2 = document.getElementsByName('password2')[0].value;
+    if (pass1 !== pass2) {
+        let passtxt = document.getElementById('passtxt');
+        passtxt.innerHTML = "Passwords do not match!";
+        event.preventDefault(); 
+    }
+});
+</script>
