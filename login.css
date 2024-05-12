@@ -1,0 +1,9 @@
+#bo{
+    background-color:beige;
+}
+#di{
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+    margin: 150px;
+}
