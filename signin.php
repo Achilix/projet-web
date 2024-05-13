@@ -29,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the statement
     if ($stmt->execute()) {
-        echo "New record inserted successfully";
+        header("Location: login.html");
     } else {
-        echo "Error inserting record: " . $stmt->error;
+        header("Location: signin.html");
     }
 
     // Close prepared statement
