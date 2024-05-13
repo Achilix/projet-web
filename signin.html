@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
+    <link rel="stylesheet" href="signin.css">
 </head>
 <body>
     <form action="signin.php" method="post">
-        <input name="f_name" required> First name<br>
-        <input name="l_name" required> Last name<br>
-        <input name="email" required> Email<br>
-        <input type="password" name="password1" required> Password<br>
-        <input type="password" name="password2" required> Confirm Password<br>
+        <input name="f_name"  placeholder="First name"> <br>
+        <input name="l_name"  placeholder="Last name"> <br>
+        <input name="email"  placeholder="Email"> <br>
+        <input type="password" name="password1" placeholder="Password" required> <br>
+        <input type="password" name="password2" placeholder="Confirm Password" required> <br>
         <button name="button">Submit</button>
         <div id="passtxt"></div>
     </form>
