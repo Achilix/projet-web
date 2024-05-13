@@ -6,9 +6,13 @@ $database = "test";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
+<<<<<<< HEAD
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+=======
+
+>>>>>>> 9c5606f2c376045eeff1e647c8f0299593ae459c
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
