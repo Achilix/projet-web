@@ -18,15 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $f_name = $_POST['f_name'];
     $l_name = $_POST['l_name'];
     $email = $_POST['email'];
-    $password1 = $_POST['password1'];
-    $password2 = $_POST['password2'];
+    $password = $_POST['password'];
     $usertype = "student"; // Set default user type
 
     // Prepare SQL statement with parameterized query
     $sql = "INSERT INTO users (usertype, first_name, last_name, email, password) 
             VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $usertype, $f_name, $l_name, $email, $password1);
+    $stmt->bind_param("sssss", $usertype, $f_name, $l_name, $email, $password);
 
     // Execute the statement
     if ($stmt->execute()) {
