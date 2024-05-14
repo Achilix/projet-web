@@ -22,10 +22,9 @@ if(isset($_COOKIE['userid'])) {
             $codeDate = strtotime($row['code_date']);
             
             // Check if the code is correct and within the last 30 seconds
-            if ($code == $latestCode && (time() - $codeDate) <= 30) {
+            if ($code == $latestCode || (time() - $codeDate) <= 30) {
                 echo "Code entered correctly within the last 30 seconds.";
             } else {
-                // Update absence count
                 $updateSql = "UPDATE users SET absencecount = absencecount + 1 WHERE userid = $userId";
                 if ($conn->query($updateSql) === TRUE) {
                     echo "Absent count updated successfully.";

@@ -22,6 +22,7 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-bottom: 20px; /* Add margin bottom */
         }
 
         label {
@@ -38,7 +39,7 @@
             box-sizing: border-box;
         }
 
-        button[type="submit"] {
+        button[type="submit"], button[type="button"] {
             width: 100%;
             padding: 10px;
             background-color: #007bff;
@@ -49,13 +50,22 @@
             transition: background-color 0.3s;
         }
 
-        button[type="submit"]:hover {
+        button[type="submit"]:hover, button[type="button"]:hover {
             background-color: #0056b3;
         }
 
         #counter {
             margin-top: 20px;
             font-size: 18px;
+        }
+
+        .btn-container {
+            text-align: center; /* Center the button */
+            margin-top: 20px; /* Add margin top */
+        }
+
+        .btn-container button {
+            margin-top: 10px; /* Add margin top */
         }
     </style>
 </head>
@@ -66,5 +76,8 @@
         <br>
         <button type="submit" name="button">Submit</button>
     </form>
+    <div class="btn-container"> <!-- Container for the button -->
+        <button type="button" onclick="window.location.href='admindb.php'">Go to Admin dashboard</button>
+    </div>
 </body>
 </html>
