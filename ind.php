@@ -6,40 +6,39 @@ $database = "test";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 if(isset($_COOKIE['userid'])) {
     $userId = $_COOKIE['userid'];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $code = $_POST['code'];
 
+        // Fetch the latest code entry from the database
         $sql = "SELECT * FROM codes ORDER BY code_date DESC LIMIT 1";
         $result = $conn->query($sql);
         
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $latestCode = $row['code'];
+            $codeDate = strtotime($row['code_date']);
             
-            if ($code != $latestCode) {
-                sleep(10); 
+            // Check if the code is correct and within the last 30 seconds
+            if ($code == $latestCode && (time() - $codeDate) <= 30) {
+                echo "Code entered correctly within the last 30 seconds.";
+            } else {
+                // Update absence count
                 $updateSql = "UPDATE users SET absencecount = absencecount + 1 WHERE userid = $userId";
                 if ($conn->query($updateSql) === TRUE) {
-                    echo "Absent count updated successfully";
+                    echo "Absent count updated successfully.";
                 } else {
-                    echo "Error updating absent count: " . $conn->error;
+                    echo "Error updating absence count: " . $conn->error;
                 }
-            } else {
-                echo "Invalid code";
             }
         } else {
-            echo "No code found in the database";
+            echo "No code found in the database.";
         }
     }
 } else {
-    echo "User ID cookie not set";
+    echo "User ID cookie not set.";
 }
 
 $conn->close();

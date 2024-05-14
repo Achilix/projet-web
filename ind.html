@@ -29,7 +29,8 @@
         input[type="code"] {
             width: 100%;
             padding: 10px;
-            border: 100px solid #ccc;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
             font-size: 16px;
@@ -54,10 +55,28 @@
 </head>
 <body>
    <form action="ind.php" method="post">
-    <label for="code">Code</label>
-    <input type="text" name="code" required>
+    <input type="text" name="code" placeholder="code">
     <br><br>
     <button name="button">Submit</button>
    </form>
+   <script>
+    setInterval(updateRemainingTime, 1000);
+
+    function updateRemainingTime() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var codeDate = xhr.responseText;
+                    var currentTime = Math.floor(Date.now() / 1000); 
+                    var remainingTime = 30 - (currentTime - codeDate);
+                    document.getElementById("remaining-time").textContent = "Remaining time: " + remainingTime + " seconds";
+                }
+            }
+        };
+        xhr.open("GET", "get_latest_code_date.php", true);
+        xhr.send();
+    }
+</script>
 </body>
 </html>

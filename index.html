@@ -66,31 +66,5 @@
         <br>
         <button type="submit" name="button">Submit</button>
     </form>
-    <div id="counter">0/</div>
-
-    <script>
-        // Function to update the counter
-        function updateCounter() {
-            // Make an AJAX request to fetch the highest user ID from the server
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        var count = xhr.responseText;
-                        // Update the counter on the page
-                        document.getElementById("counter").textContent = "0/" + count;
-                    }
-                }
-            };
-            xhr.open("GET", "get_highest_user_id.php", true);
-            xhr.send();
-        }
-
-        // Call the updateCounter function initially
-        updateCounter();
-
-        // Set an interval to call the updateCounter function every 10 seconds
-        setInterval(updateCounter, 10000);
-    </script>
 </body>
 </html>
