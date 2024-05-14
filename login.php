@@ -19,6 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
         $userType = $user['usertype'];
+        $userID = $user['userid']; // Retrieve user ID from database result
+
+        // Set user ID cookie
+        setcookie("userid", $userID, time() + 3600, "/");
 
         if ($userType === 'admin') {
             header("Location: index.html");
