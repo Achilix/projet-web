@@ -67,7 +67,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
             margin-top: 10px; /* Add margin top */
-            margin-bottom: 20px; /* Adjust margin bottom */
+            margin-bottom: 10px; /* Adjust margin bottom */
         }
 
         button:hover {
@@ -77,15 +77,14 @@
 </head>
 <body>
    <div class="container">
-       <form action="ind.php" method="post">
+       <form action="ind.php" method="post" id="codeForm">
             <input type="text" name="code" placeholder="code">
             <br><br>
-            <button class="btn-primary" name="button">Submit</button>
-        </form>
+            <button type="submit" class="btn-primary" name="button">Submit</button>
+       </form>
 
-       <!-- Button to go to another page -->
+   
        <button class="btn-secondary" onclick="window.location.href='userdb.php'">View Your Data</button>
    </div>
 </body>
 </html>
-    

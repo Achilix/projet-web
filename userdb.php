@@ -127,7 +127,7 @@
     </table>
 
     <div class="btn-container">
-        <a href="index.html" class="btn">Go Back</a>
+        <a href="ind.html" class="btn">Go Back</a>
     </div>
 
 </div>
