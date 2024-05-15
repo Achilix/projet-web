@@ -81,18 +81,7 @@
             <th>Last Name</th>
             <th>Absence Count</th>
         </tr>
-       
-    </table>
-
-    <div class="btn-container">
-        <a href="ind.html" class="btn">Go Back</a>
-    </div>
-
-</div>
-
-</body>
-</html>
-<?php
+        <?php
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -133,3 +122,14 @@
 
         $conn->close();
         ?>
+
+    </table>
+
+    <div class="btn-container">
+        <a href="ind.html" class="btn">Go Back</a>
+    </div>
+
+</div>
+
+</body>
+</html>
