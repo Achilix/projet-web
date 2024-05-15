@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="code_input.css">
     <style>
@@ -17,13 +17,17 @@
             height: 100vh;
         }
 
+        .container {
+            text-align: center;
+        }
+
         form {
             background-color: #fff;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
-            text-align: center;
+            margin: 0 auto; /* Center the form horizontally */
         }
 
         input[type="code"] {
@@ -36,7 +40,8 @@
             font-size: 16px;
         }
 
-        button {
+        /* Style for the first button */
+        .btn-primary {
             width: 100%;
             padding: 10px;
             background-color: #007bff;
@@ -46,6 +51,23 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-top: 10px; /* Add margin top */
+            margin-bottom: 10px; /* Add margin bottom */
+        }
+
+        /* Style for the second button */
+        .btn-secondary {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Add margin top */
+            margin-bottom: 20px; /* Adjust margin bottom */
         }
 
         button:hover {
@@ -54,29 +76,16 @@
     </style>
 </head>
 <body>
-   <form action="ind.php" method="post">
-    <input type="text" name="code" placeholder="code">
-    <br><br>
-    <button name="button">Submit</button>
-   </form>
-   <script>
-    setInterval(updateRemainingTime, 1000);
+   <div class="container">
+       <form action="ind.php" method="post">
+            <input type="text" name="code" placeholder="code">
+            <br><br>
+            <button class="btn-primary" name="button">Submit</button>
+        </form>
 
-    function updateRemainingTime() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var codeDate = xhr.responseText;
-                    var currentTime = Math.floor(Date.now() / 1000); 
-                    var remainingTime = 30 - (currentTime - codeDate);
-                    document.getElementById("remaining-time").textContent = "Remaining time: " + remainingTime + " seconds";
-                }
-            }
-        };
-        xhr.open("GET", "get_latest_code_date.php", true);
-        xhr.send();
-    }
-</script>
+       <!-- Button to go to another page -->
+       <button class="btn-secondary" onclick="window.location.href='userdb.php'">View Your Data</button>
+   </div>
 </body>
 </html>
+    
