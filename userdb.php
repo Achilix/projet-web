@@ -81,8 +81,18 @@
             <th>Last Name</th>
             <th>Absence Count</th>
         </tr>
-        <?php
-        // Database connection
+       
+    </table>
+
+    <div class="btn-container">
+        <a href="ind.html" class="btn">Go Back</a>
+    </div>
+
+</div>
+
+</body>
+</html>
+<?php
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -92,7 +102,6 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Retrieve specific columns from the database for the logged-in user
         if(isset($_COOKIE['userid'])) {
             $userId = $_COOKIE['userid'];
 
@@ -124,13 +133,3 @@
 
         $conn->close();
         ?>
-    </table>
-
-    <div class="btn-container">
-        <a href="ind.html" class="btn">Go Back</a>
-    </div>
-
-</div>
-
-</body>
-</html>

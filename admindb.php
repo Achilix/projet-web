@@ -81,35 +81,7 @@
             <th>Last Name</th>
             <th>Absence Count</th>
         </tr>
-        <?php
-        // Database connection
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "test";
-        $conn = new mysqli($servername, $username, $password, $database);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        // Retrieve specific columns from the database, excluding admins
-        $sql = "SELECT first_name, last_name, absencecount FROM users WHERE usertype != 'admin'";
-        $result = $conn->query($sql);
-
-        // Display user data in HTML table rows
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["first_name"] . "</td>";
-                echo "<td>" . $row["last_name"] . "</td>";
-                echo "<td>" . $row["absencecount"] . "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='3'>No users found</td></tr>";
-        }
-        $conn->close();
-        ?>
+      
     </table>
 
     <div class="btn-container">
@@ -119,4 +91,27 @@
 </div>
 
 </body>
+<?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "test";
+        $conn = new mysqli($servername, $username, $password, $database);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT first_name, last_name, absencecount FROM users WHERE usertype != 'admin'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["first_name"] . "</td>";
+                echo "<td>" . $row["last_name"] . "</td>";
+                echo "<td>" . $row["absencecount"] . "</td>";
+                echo "</tr>";
+            }
+        } else 
+        $conn->close();
+        ?>
 </html>

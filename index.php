@@ -17,7 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO codes (code, code_date) VALUES ('$code', NOW());";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        $updateSql = "UPDATE users SET absencecount = absencecount + 1 WHERE usertype = 'student'";
+        if ($conn->query($updateSql) === TRUE) {
+            header("Location: boncode.html");
+            exit;
+        } else {
+            echo "Error updating absence count: " . $conn->error;
+        }
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

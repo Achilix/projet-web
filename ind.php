@@ -26,15 +26,19 @@ if (isset($_COOKIE['userid'])) {
 
             // Check if the code is correct
             if ($code == $latestCode) {
-                echo "Code matched the latest code in the database.";
-            } else {
-                // Update absence count only if code is incorrect
-                $updateSql = "UPDATE users SET absencecount = absencecount + 1 WHERE userid = $userId";
+                // Decrement absence count by one
+                $updateSql = "UPDATE users SET absencecount = absencecount - 1 WHERE userid = $userId";
                 if ($conn->query($updateSql) === TRUE) {
-                    echo "Absent count updated successfully.";
+                    // Redirect to success page for correct code
+                    header("Location: boncodeuser.html");
+                    exit();
                 } else {
                     echo "Error updating absence count: " . $conn->error;
                 }
+            } else {
+                // Redirect to error page for incorrect code
+                header("Location: errorpage.html");
+                exit();
             }
         } else {
             echo "No code found in the database.";
