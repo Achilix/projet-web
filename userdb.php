@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Data</title>
+    <title>Student Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
