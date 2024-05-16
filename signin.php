@@ -1,11 +1,10 @@
 <?php
 
-$servername = "localhost"; // Assuming MySQL server is running locally
-$username = "root"; // Default username for XAMPP MySQL
-$password = ""; // Default password for XAMPP MySQL (empty by default)
-$database = "test"; // Change this to the name of your MySQL database
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$database = "test"; 
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
@@ -19,27 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $l_name = $_POST['l_name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $usertype = "student"; // Set default user type
+    $usertype = "student";
 
-    // Prepare SQL statement with parameterized query
     $sql = "INSERT INTO users (usertype, first_name, last_name, email, password) 
             VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssss", $usertype, $f_name, $l_name, $email, $password);
-
-    // Execute the statement
     if ($stmt->execute()) {
         header("Location: login.html");
     } else {
         header("Location: signin.html");
     }
-
-    // Close prepared statement
     $stmt->close();
 } else {
     echo "Form not submitted";
 }
-
-// Close connection
 $conn->close();
 ?>

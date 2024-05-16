@@ -8,7 +8,7 @@
             
             margin: 0;
             padding: 0;
-            background-color: #000000;
+            background-color: #e3d2d2;
             display: flex;
             justify-content: center;
             align-items: center;
