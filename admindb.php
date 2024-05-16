@@ -87,9 +87,7 @@
         $password = "";
         $database = "test";
         $conn = new mysqli($servername, $username, $password, $database);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+       
 
         $sql = "SELECT first_name, last_name, absencecount FROM users WHERE usertype != 'admin'";
         $result = $conn->query($sql);

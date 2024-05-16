@@ -6,10 +6,6 @@ $database = "test";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 if (isset($_COOKIE['userid'])) {
     $userId = $_COOKIE['userid'];
 
@@ -29,12 +25,16 @@ if (isset($_COOKIE['userid'])) {
                     header("Location: boncodeuser.html");
                     exit();
                 } else {
-                    echo "Error updating record: " . $conn->error;
+                    header("Location: errorpage.html");
+                    exit();
                 }
             } else {
                 header("Location: errorpage.html");
                 exit();
             }
+        }else {
+            header("Location: errorpage.html");
+            exit();
         }
     }
 }

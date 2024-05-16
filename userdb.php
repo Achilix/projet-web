@@ -1,112 +1,104 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            
-            margin: 0;
-            padding: 0;
-            background-color: #e3d2d2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "test";
+$conn = new mysqli($servername, $username, $password, $database);
 
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 800px;
-            text-align: center;
-        }
+if (isset($_COOKIE['userid'])) {
+    $userId = $_COOKIE['userid'];
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 20px;
-        }
+    $sql = "SELECT first_name, last_name, absencecount FROM users WHERE userid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
+    if ($result->num_rows > 0) {
+        ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>User Data</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #e3d2d2;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                }
 
-        th {
-            background-color: #f2f2f2;
-        }
+                .container {
+                    background-color: #fff;
+                    border-radius: 10px;
+                    padding: 30px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    width: 800px;
+                    text-align: center;
+                }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
 
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: left;
+                }
 
-        .btn-container {
-            margin-top: 20px;
-        }
+                th {
+                    background-color: #f2f2f2;
+                }
 
-        .btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+                tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
 
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
+                h2 {
+                    font-size: 24px;
+                    margin-bottom: 20px;
+                }
 
-<div class="container">
+                .btn-container {
+                    margin-top: 20px;
+                }
 
-    <h2>User Data</h2>
+                .btn {
+                    background-color: #007bff;
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 10px 20px;
+                    text-decoration: none;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
 
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Absence Count</th>
-        </tr>
-        <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "test";
-        $conn = new mysqli($servername, $username, $password, $database);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+                .btn:hover {
+                    background-color: #0056b3;
+                }
+            </style>
+        </head>
+        <body>
 
-        if(isset($_COOKIE['userid'])) {
-            $userId = $_COOKIE['userid'];
+        <div class="container">
+            <h2>User Data</h2>
 
-            $sql = "SELECT first_name, last_name, absencecount FROM users WHERE userid = ?";
-            $stmt = $conn->prepare($sql);
-            if (!$stmt) {
-                die("Error preparing statement: " . $conn->error);
-            }
-            $stmt->bind_param("i", $userId);
-            if (!$stmt->execute()) {
-                die("Error executing statement: " . $stmt->error);
-            }
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) {
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Absence Count</th>
+                </tr>
+                <?php
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row["first_name"] . "</td>";
@@ -114,23 +106,23 @@
                     echo "<td>" . $row["absencecount"] . "</td>";
                     echo "</tr>";
                 }
-            } else {
-                echo "<tr><td colspan='3'>No data found</td></tr>";
-            }
-        } else {
-            echo "User ID cookie not set.";
-        }
+                ?>
+            </table>
 
-        $conn->close();
-        ?>
+            <div class="btn-container">
+                <a href="javascript:history.go(-1);" class="btn">Go Back</a>
+            </div>
+        </div>
 
-    </table>
+        </body>
+        </html>
+        <?php
+    } else {
+        echo "No data found";
+    }
+} else {
+    echo "User ID cookie not set.";
+}
 
-    <div class="btn-container">
-        <a href="ind.html" class="btn">Go Back</a>
-    </div>
-
-</div>
-
-</body>
-</html>
+$conn->close();
+?>
