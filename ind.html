@@ -26,20 +26,23 @@
             padding: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
-            margin: 0 auto; /* Center the form horizontally */
+            margin: 0 auto; 
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
         }
 
-        input[type="code"] {
+
+        input[type="text"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 0px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
-            font-size: 16px;
         }
 
-        /* Style for the first button */
         .btn-primary {
             width: 100%;
             padding: 10px;
@@ -50,11 +53,10 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px; /* Add margin top */
-            margin-bottom: 10px; /* Add margin bottom */
+            margin-top: 10px; 
+            margin-bottom: 10px; 
         }
 
-        /* Style for the second button */
         .btn-secondary {
             width: 100%;
             padding: 10px;
@@ -65,8 +67,8 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px; /* Add margin top */
-            margin-bottom: 10px; /* Adjust margin bottom */
+            margin-top: 10px; 
+            margin-bottom: 10px; 
         }
 
         button:hover {
@@ -77,6 +79,7 @@
 <body>
    <div class="container">
        <form action="ind.php" method="post" id="codeForm">
+        <label for="code">Code</label>
             <input type="text" name="code" placeholder="code">
             <br><br>
             <button type="submit" class="btn-primary" name="button">Submit</button>
